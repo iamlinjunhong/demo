@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    nentityame: test
+    url: jdbc:mysql://119.29.160.80:3306/salesManage
+    username: root
+    password: qingren.7
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.manage.

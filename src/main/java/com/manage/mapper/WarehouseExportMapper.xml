@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.dao.WarehouseExportMapper">
+  <resultMap id="BaseResultMap" type="com.manage.entity.WarehouseExport">
+    <id column="exportId" jdbcType="INTEGER" property="exportid" />
+    <result column="exportDate" jdbcType="TIMESTAMP" property="exportdate" />
+    <result column="warehouseId" jdbcType="INTEGER" property="warehouseid" />
+    <result column="goodsId" jdbcType="INTEGER" property="goodsid" />
+    <result column="exportNumber" jdbcType="INTEGER" property="exportnumber" />
+    <result column="orderId" jdbcType="INTEGER" property="orderid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    exportId, exportDate, warehouseId, goodsId, exportNumber, orderId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from warehouseExport
+    where exportId = #{exportid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from warehouseExport
+    where exportId = #{exportid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.manage.entity.WarehouseExport">
+    insert into warehouseExport (exportId, exportDate, warehouseId, 
+      goodsId, exportNumber, orderId
+      )
+    values (#{exportid,jdbcType=INTEGER}, #{exportdate,jdbcType=TIMESTAMP}, #{warehouseid,jdbcType=INTEGER}, 
+      #{goodsid,jdbcType=INTEGER}, #{exportnumber,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.manage.entity.WarehouseExport">
+    insert into warehouseExport
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="exportid != null">
+        exportId,
+      </if>
+      <if test="exportdate != null">
+        exportDate,
+      </if>
+      <if test="warehouseid != null">
+        warehouseId,
+      </if>
+      <if test="goodsid != null">
+        goodsId,
+      </if>
+      <if test="exportnumber != null">
+        exportNumber,
+      </if>
+      <if test="orderid != null">
+        orderId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="exportid != null">
+        #{exportid,jdbcType=INTEGER},
+      </if>
+      <if test="exportdate != null">
+        #{exportdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warehouseid != null">
+        #{warehouseid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="exportnumber != null">
+        #{exportnumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.manage.entity.WarehouseExport">
+    update warehouseExport
+    <set>
+      <if test="exportdate != null">
+        exportDate = #{exportdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warehouseid != null">
+        warehouseId = #{warehouseid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        goodsId = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="exportnumber != null">
+        exportNumber = #{exportnumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null">
+        orderId = #{orderid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where exportId = #{exportid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.manage.entity.WarehouseExport">
+    update warehouseExport
+    set exportDate = #{exportdate,jdbcType=TIMESTAMP},
+      warehouseId = #{warehouseid,jdbcType=INTEGER},
+      goodsId = #{goodsid,jdbcType=INTEGER},
+      exportNumber = #{exportnumber,jdbcType=INTEGER},
+      orderId = #{orderid,jdbcType=INTEGER}
+    where exportId = #{exportid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.dao.ContractMapper">
+  <resultMap id="BaseResultMap" type="com.manage.entity.Contract">
+    <id column="contractId" jdbcType="INTEGER" property="contractid" />
+    <result column="goodsId" jdbcType="INTEGER" property="goodsid" />
+    <result column="contractShop" jdbcType="VARCHAR" property="contractshop" />
+    <result column="contractNumber" jdbcType="INTEGER" property="contractnumber" />
+    <result column="singlePrice" jdbcType="INTEGER" property="singleprice" />
+    <result column="realNumber" jdbcType="INTEGER" property="realnumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    contractId, goodsId, contractShop, contractNumber, singlePrice, realNumber
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract
+    where contractId = #{contractid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contract
+    where contractId = #{contractid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.manage.entity.Contract">
+    insert into contract (contractId, goodsId, contractShop, 
+      contractNumber, singlePrice, realNumber
+      )
+    values (#{contractid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER}, #{contractshop,jdbcType=VARCHAR}, 
+      #{contractnumber,jdbcType=INTEGER}, #{singleprice,jdbcType=INTEGER}, #{realnumber,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.manage.entity.Contract">
+    insert into contract
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractid != null">
+        contractId,
+      </if>
+      <if test="goodsid != null">
+        goodsId,
+      </if>
+      <if test="contractshop != null">
+        contractShop,
+      </if>
+      <if test="contractnumber != null">
+        contractNumber,
+      </if>
+      <if test="singleprice != null">
+        singlePrice,
+      </if>
+      <if test="realnumber != null">
+        realNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractid != null">
+        #{contractid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="contractshop != null">
+        #{contractshop,jdbcType=VARCHAR},
+      </if>
+      <if test="contractnumber != null">
+        #{contractnumber,jdbcType=INTEGER},
+      </if>
+      <if test="singleprice != null">
+        #{singleprice,jdbcType=INTEGER},
+      </if>
+      <if test="realnumber != null">
+        #{realnumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.manage.entity.Contract">
+    update contract
+    <set>
+      <if test="goodsid != null">
+        goodsId = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="contractshop != null">
+        contractShop = #{contractshop,jdbcType=VARCHAR},
+      </if>
+      <if test="contractnumber != null">
+        contractNumber = #{contractnumber,jdbcType=INTEGER},
+      </if>
+      <if test="singleprice != null">
+        singlePrice = #{singleprice,jdbcType=INTEGER},
+      </if>
+      <if test="realnumber != null">
+        realNumber = #{realnumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where contractId = #{contractid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.manage.entity.Contract">
+    update contract
+    set goodsId = #{goodsid,jdbcType=INTEGER},
+      contractShop = #{contractshop,jdbcType=VARCHAR},
+      contractNumber = #{contractnumber,jdbcType=INTEGER},
+      singlePrice = #{singleprice,jdbcType=INTEGER},
+      realNumber = #{realnumber,jdbcType=INTEGER}
+    where contractId = #{contractid,jdbcType=INTEGER}
+  </update>
+</mapper>

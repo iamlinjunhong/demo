@@ -1,0 +1,59 @@
+﻿user //用户表
+account:账号
+password:密码
+salt:盐值
+
+
+
+warehouse  //仓库
+仓库编号：warehouseId
+仓库名称：warehouseName
+仓库类型：warehouseType
+
+
+goods  //物品
+物品编号：goodsId
+物品名称：goodsName
+仓库编号：warehouseId
+数量：goodsNumber
+供应单价：singlePrice
+计划单价：planPrice
+
+contract //采购合同信息
+合同号：contractId
+供应商号：contractShop
+物品编号：goodsId
+合同数量：contractNumber
+供应单价：singlePrice
+实际入库数量:realNumber
+
+warehouseImport  //物品入库信息
+入库单编号：importId
+入库日期：entryDate
+仓库编号：warehouseId
+物品编号：goodsId
+数量：importNumber
+合同号:contractId
+
+warehouseExport  //物品出库信息
+出库单编号：exportId
+出库日期：exportDate
+仓库编号：warehouseId
+物品编号：goodsId
+数量：exportNumber
+订单编号：orderId
+
+
+
+
+order  //订单
+订单编号：orderId
+订单创建时间：orderTime
+消费者账号：account
+仓库编号：warehouseId
+物品编号：goodsId
+数量:orderNumber
+
+
+
+

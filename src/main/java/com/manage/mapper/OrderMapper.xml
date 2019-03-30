@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.manage.entity.Order">
+    <id column="orderId" jdbcType="INTEGER" property="orderid" />
+    <result column="orderTime" jdbcType="TIMESTAMP" property="ordertime" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="warehouseId" jdbcType="INTEGER" property="warehouseid" />
+    <result column="goodsId" jdbcType="INTEGER" property="goodsid" />
+    <result column="orderNumber" jdbcType="INTEGER" property="ordernumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    orderId, orderTime, account, warehouseId, goodsId, orderNumber
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.manage.entity.Order">
+    insert into order (orderId, orderTime, account, 
+      warehouseId, goodsId, orderNumber
+      )
+    values (#{orderid,jdbcType=INTEGER}, #{ordertime,jdbcType=TIMESTAMP}, #{account,jdbcType=VARCHAR}, 
+      #{warehouseid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER}, #{ordernumber,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.manage.entity.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        orderId,
+      </if>
+      <if test="ordertime != null">
+        orderTime,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="warehouseid != null">
+        warehouseId,
+      </if>
+      <if test="goodsid != null">
+        goodsId,
+      </if>
+      <if test="ordernumber != null">
+        orderNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="ordertime != null">
+        #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseid != null">
+        #{warehouseid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernumber != null">
+        #{ordernumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.manage.entity.Order">
+    update order
+    <set>
+      <if test="ordertime != null">
+        orderTime = #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseid != null">
+        warehouseId = #{warehouseid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        goodsId = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernumber != null">
+        orderNumber = #{ordernumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.manage.entity.Order">
+    update order
+    set orderTime = #{ordertime,jdbcType=TIMESTAMP},
+      account = #{account,jdbcType=VARCHAR},
+      warehouseId = #{warehouseid,jdbcType=INTEGER},
+      goodsId = #{goodsid,jdbcType=INTEGER},
+      orderNumber = #{ordernumber,jdbcType=INTEGER}
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </update>
+</mapper>

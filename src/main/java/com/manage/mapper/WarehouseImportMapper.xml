@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.dao.WarehouseImportMapper">
+  <resultMap id="BaseResultMap" type="com.manage.entity.WarehouseImport">
+    <id column="importId" jdbcType="INTEGER" property="importid" />
+    <result column="entryDate" jdbcType="TIMESTAMP" property="entrydate" />
+    <result column="warehouseId" jdbcType="INTEGER" property="warehouseid" />
+    <result column="goodsId" jdbcType="INTEGER" property="goodsid" />
+    <result column="importNumber" jdbcType="INTEGER" property="importnumber" />
+    <result column="contractId" jdbcType="INTEGER" property="contractid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    importId, entryDate, warehouseId, goodsId, importNumber, contractId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from warehouseImport
+    where importId = #{importid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from warehouseImport
+    where importId = #{importid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.manage.entity.WarehouseImport">
+    insert into warehouseImport (importId, entryDate, warehouseId, 
+      goodsId, importNumber, contractId
+      )
+    values (#{importid,jdbcType=INTEGER}, #{entrydate,jdbcType=TIMESTAMP}, #{warehouseid,jdbcType=INTEGER}, 
+      #{goodsid,jdbcType=INTEGER}, #{importnumber,jdbcType=INTEGER}, #{contractid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.manage.entity.WarehouseImport">
+    insert into warehouseImport
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="importid != null">
+        importId,
+      </if>
+      <if test="entrydate != null">
+        entryDate,
+      </if>
+      <if test="warehouseid != null">
+        warehouseId,
+      </if>
+      <if test="goodsid != null">
+        goodsId,
+      </if>
+      <if test="importnumber != null">
+        importNumber,
+      </if>
+      <if test="contractid != null">
+        contractId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="importid != null">
+        #{importid,jdbcType=INTEGER},
+      </if>
+      <if test="entrydate != null">
+        #{entrydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warehouseid != null">
+        #{warehouseid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="importnumber != null">
+        #{importnumber,jdbcType=INTEGER},
+      </if>
+      <if test="contractid != null">
+        #{contractid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.manage.entity.WarehouseImport">
+    update warehouseImport
+    <set>
+      <if test="entrydate != null">
+        entryDate = #{entrydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warehouseid != null">
+        warehouseId = #{warehouseid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        goodsId = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="importnumber != null">
+        importNumber = #{importnumber,jdbcType=INTEGER},
+      </if>
+      <if test="contractid != null">
+        contractId = #{contractid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where importId = #{importid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.manage.entity.WarehouseImport">
+    update warehouseImport
+    set entryDate = #{entrydate,jdbcType=TIMESTAMP},
+      warehouseId = #{warehouseid,jdbcType=INTEGER},
+      goodsId = #{goodsid,jdbcType=INTEGER},
+      importNumber = #{importnumber,jdbcType=INTEGER},
+      contractId = #{contractid,jdbcType=INTEGER}
+    where importId = #{importid,jdbcType=INTEGER}
+  </update>
+</mapper>
