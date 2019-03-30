@@ -1,0 +1,77 @@
+use `salesManage`;
+
+
+CREATE TABLE `user`(
+    `id` INT  COMMENT '用户id',
+    `account` VARCHAR(20) COMMENT '用户账号',
+    `password` VARCHAR(20) COMMENT '密码',
+    `salt` VARCHAR(20) COMMENT '盐值',
+     PRIMARY KEY(`id`,`account`)
+);
+
+
+CREATE TABLE `warehouse`(
+    `warehouseId` INT PRIMARY KEY AUTO_INCREMENT COMMENT '仓库id',
+    `warehouseName` VARCHAR(20) COMMENT '仓库名称',
+    `warehouseType` VARCHAR(20) COMMENT '仓库类型'
+);
+
+
+CREATE TABLE `goods`(
+    `goodsId` INT PRIMARY KEY AUTO_INCREMENT COMMENT '物品编号',
+    `goodsName` VARCHAR(20) COMMENT '物品名称',
+    `warehouseId` INT COMMENT '仓库id',
+    `goodsNumber` INT COMMENT '物品数量',
+    `singlePrice` VARCHAR(20) COMMENT '物品单价',
+    `planPrice` VARCHAR(20) COMMENT '计划单价',
+    FOREIGN KEY(`warehouseId`) REFERENCES `warehouse`(`warehouseId`)
+);
+
+
+CREATE TABLE `contract`(
+    `contractId` INT PRIMARY KEY AUTO_INCREMENT COMMENT '合同号',
+    `goodsId` INT COMMENT '物品编号',
+    `contractShop` VARCHAR(20) COMMENT '供应商号',
+    `contractNumber` INT COMMENT '合同数量',
+    `singlePrice` INT COMMENT '供应单价',
+    `realNumber` INT COMMENT '实际入库数量',
+    FOREIGN KEY(`goodsId`) REFERENCES `goods`(`goodsId`)
+);
+
+
+CREATE TABLE `warehouseImport`(
+    `importId` INT PRIMARY KEY AUTO_INCREMENT COMMENT '入库单编号',
+    `entryDate` DATETIME COMMENT '入库时间',
+    `warehouseId` INT COMMENT '仓库id',
+    `goodsId`  INT COMMENT '物品编号',
+    `importNumber` INT COMMENT '入库数量',
+    `contractId` INT COMMENT '合同号',
+    FOREIGN KEY(`warehouseId`) REFERENCES `warehouse`(`warehouseId`),
+    FOREIGN KEY(`contractId`) REFERENCES `contract`(`contractId`),
+    FOREIGN KEY(`goodsId`) REFERENCES `goods`(`goodsId`)
+);
+
+
+CREATE TABLE `warehouseExport`(
+    `exportId` INT PRIMARY KEY AUTO_INCREMENT COMMENT '出库单编号',
+    `exportDate` DATETIME COMMENT '出库时间',
+    `warehouseId` INT COMMENT '仓库id',
+    `goodsId`  INT COMMENT '物品编号',
+    `exportNumber` INT COMMENT '出库数量',
+    `orderId` INT COMMENT '订单编号',
+    FOREIGN KEY(`warehouseId`) REFERENCES `warehouse`(`warehouseId`),
+    FOREIGN KEY(`goodsId`) REFERENCES `goods`(`goodsId`),
+    FOREIGN KEY(`orderId`) REFERENCES `order`(`orderId`)
+);
+
+
+CREATE TABLE `order`(
+    `orderId` INT PRIMARY KEY AUTO_INCREMENT COMMENT '订单编号',
+    `orderTime` DATETIME COMMENT '订单创建时间',
+    `account` VARCHAR(20) COMMENT '用户账号',
+    `warehouseId` INT COMMENT '仓库id',
+    `goodsId` INT COMMENT '物品编号',
+    `orderNumber` INT COMMENT '订单数量',
+    FOREIGN KEY(`goodsId`) REFERENCES `goods`(`goodsId`),
+    FOREIGN KEY(`warehouseId`)REFERENCES `warehouse`(`warehouseId`)
+);
