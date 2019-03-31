@@ -93,4 +93,10 @@ public class WarehouseController {
         }
     }
 
+
+    @RequestMapping(value = "/delete",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    public  Object selectAll(@RequestBody JSONObject jsonparams, HttpSession httpSession){
+        return "";
+    }
+
 }
