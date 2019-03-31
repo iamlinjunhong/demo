@@ -9,9 +9,9 @@ public class Goods {
 
     private Integer goodsnumber;
 
-    private String singleprice;
+    private Integer singleprice;
 
-    private String planprice;
+    private Integer planprice;
 
     public Integer getGoodsid() {
         return goodsid;
@@ -45,19 +45,19 @@ public class Goods {
         this.goodsnumber = goodsnumber;
     }
 
-    public String getSingleprice() {
+    public Integer getSingleprice() {
         return singleprice;
     }
 
-    public void setSingleprice(String singleprice) {
-        this.singleprice = singleprice == null ? null : singleprice.trim();
+    public void setSingleprice(Integer singleprice) {
+        this.singleprice = singleprice;
     }
 
-    public String getPlanprice() {
+    public Integer getPlanprice() {
         return planprice;
     }
 
-    public void setPlanprice(String planprice) {
-        this.planprice = planprice == null ? null : planprice.trim();
+    public void setPlanprice(Integer planprice) {
+        this.planprice = planprice;
     }
 }

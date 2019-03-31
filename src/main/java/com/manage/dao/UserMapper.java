@@ -3,6 +3,8 @@ package com.manage.dao;
 import com.manage.entity.User;
 import com.manage.entity.UserKey;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(UserKey key);
 
@@ -15,4 +17,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<User> selectAll();
 }
